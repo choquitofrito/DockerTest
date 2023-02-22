@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Libray Songs
+{% endblock %}
+
+{% block body %}
+	{% for song in librarySongs %}
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="{{ path ('show_study_statuses', { id:song.id} ) }}">{{ song.title }}</a>
+			</li>
+		</ul>
+	{% endfor %}
+{% endblock %}
