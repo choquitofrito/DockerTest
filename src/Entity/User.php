@@ -6,10 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+ 
+#[Table(name:"`user`")]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -31,10 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: StudyStatus::class, cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: StudyStatus::class, cascade: ['persist'])]
     private Collection $studyStatuses;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Library::class, cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Library::class, cascade: ['persist'])]
     private Collection $libraries;
 
 
